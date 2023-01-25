@@ -52,6 +52,16 @@ const Header = () => {
           </Badge>
 
         </Container>
+
+        <Menu
+              id="basic-menu"
+              anchorEl={anchorEl}
+              open={open}
+              onClose={handleClose}
+              MenuListProps={{
+                'aria-labelledby': 'basic-button',
+              }}
+            >
         {/* cart code start */}
         {
           getData.length ?
@@ -75,7 +85,7 @@ const Header = () => {
                                 <img src={e.imgdata} style={{ width: "5rem", height: "5rem" }} alt="" />
                               </NavLink>
                             </td>
-                            <td style={{color:'white'}}>
+                            <td >
                               <p>{e.rname}</p>
                               <p>Price : ₹{e.price}</p>
                               <p>Quantity : {e.qnty}</p>
@@ -92,7 +102,7 @@ const Header = () => {
                       )
                     })
                   }
-
+                  <p className="text-center mt-1">Total :₹ 300</p>
                 </tbody>
               </Table>
 
@@ -100,25 +110,18 @@ const Header = () => {
             </div>
             :
 
-            <Menu
-              id="basic-menu"
-              anchorEl={anchorEl}
-              open={open}
-              onClose={handleClose}
-              MenuListProps={{
-                'aria-labelledby': 'basic-button',
-              }}
-            >
+            
               <div className="cart_detail d-flex p-3">
                 <i className='fas fa-close smallclose' style={{ position: "absolute", top: 2, right: 20, fontSize: 23, cursor: "pointer" }} onClick={handleClose}></i>
                 <p className='m-1 p-2' style={{ fontSize: '22px' }}>Your cart is empty </p>
                 <img src="./cart.gif" alt="" style={{ width: '50px' }} className='mt-2' />
 
               </div>
+            }
 
             </Menu>
 
-        }
+       
 
 
       </Navbar>
