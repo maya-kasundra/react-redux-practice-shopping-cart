@@ -1,16 +1,36 @@
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import Container from 'react-bootstrap/Container';
 // import Nav from 'react-bootstrap/Nav';
 import Navbar from 'react-bootstrap/Navbar';
 import Badge from '@mui/material/Badge';
 import { NavLink } from 'react-router-dom';
-import { useSelector } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import Menu from '@mui/material/Menu';
 // import Button from 'react-bootstrap/Button';
 // import Card from 'react-bootstrap/Card';
 import { Table } from 'react-bootstrap';
+import { Remove } from '../redux/actions/action';
 
 const Header = () => {
+  const [price, setPrice]= useState(0);
+
+  const dispatch = useDispatch();
+
+  const deleteFn = (id)=>{
+      dispatch(Remove(id));
+  }
+
+  const total = ()=>{
+    let price = 0;
+    getData.map((ele,k)=>{
+       return price = ele.price + price;
+    })
+    setPrice(price)
+  }
+  useEffect(()=>{
+    total()
+  },[total])
+ 
 
   const [anchorEl, setAnchorEl] = useState(null);
   const open = Boolean(anchorEl);
@@ -23,12 +43,12 @@ const Header = () => {
 
 
   const getData = useSelector((state) => {
-    console.log(state);
+    // console.log(state);
     return state.cartReducer.carts;
   }
 
   )
-  console.log(getData);
+  // console.log(getData);
 
 
 
@@ -76,7 +96,7 @@ const Header = () => {
                 <tbody>
                   {
                     getData.map((e) => {
-                    console.log(e); 
+                    {/* console.log(e);  */}
                       return (
                         <>
                           <tr>
@@ -89,12 +109,12 @@ const Header = () => {
                               <p>{e.rname}</p>
                               <p>Price : ₹{e.price}</p>
                               <p>Quantity : {e.qnty}</p>
-                              <p style={{ color: "red", fontSize: 20, cursor: "pointer" }}  >
+                              <p style={{ color: "red", fontSize: 20, cursor: "pointer" }} onClick={()=>deleteFn(e.id)} >
                                 <i className='fas fa-trash smalltrash'></i>
                               </p>
                             </td>
 
-                            <td className='mt-5' style={{ color: "red", fontSize: 20, cursor: "pointer" }} >
+                            <td className='mt-5' style={{ color: "red", fontSize: 20, cursor: "pointer" }} onClick={()=>deleteFn(e.id)} >
                               <i className='fas fa-trash largetrash'></i>
                             </td>
                           </tr>
@@ -102,7 +122,7 @@ const Header = () => {
                       )
                     })
                   }
-                  <p className="text-center mt-1">Total :₹ 300</p>
+                  <p className="text-center mt-1">Total :₹ {price}</p>
                 </tbody>
               </Table>
 

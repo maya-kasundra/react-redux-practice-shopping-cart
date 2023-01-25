@@ -13,7 +13,7 @@ const Cards = () => {
     const send =(ele)=>{
       dispatch(Add(ele))
     }
-    console.log(send);
+    // console.log(send);
   return (<>
     <h4 className='text-center m-2'>All Product Details</h4>
     <div className='row d-flex justify-content-center align-items-center'>
